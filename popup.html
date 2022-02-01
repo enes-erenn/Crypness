@@ -4,20 +4,66 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" sizes="128px" href="./Img/icon128.png" />
+    <link rel="icon" sizes="128px" href="./assets/images/icon128.png" />
     <link rel="stylesheet" href="./styles/styles.css" />
     <title>Crypness | Crypto Alert Extension</title>
   </head>
   <body>
     <header id="header">
       <nav id="nav">
-        <h1 id="heading">Crypness</h1>
+        <div class="aside"></div>
+
+        <div class="aside">
+          <h1 id="heading">Crypness</h1>
+        </div>
+
+        <div class="aside">
+          <button class="buttons">
+            <img class="icons" src="./assets/icons/fav.svg" alt="" />
+          </button>
+          <button class="buttons">
+            <img class="icons" src="./assets/icons/bell.svg" alt="" />
+          </button>
+          <button id="settings" class="buttons">
+            <img class="icons" src="./assets/icons/settings.svg" " alt="">
+          </button>
+        </div>
       </nav>
     </header>
+
     <main id="main">
-      <div id="tokens">
+      <div id="coin-list">
+        <div class="loader"></div>
       </div>
     </main>
+
+    <div id="settingsModal" class="hidden modal">
+      <div>
+        <h3 id="settings">Settings</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div>
+        <h5>Target Currency</h5>
+        <div id="currensies">
+          <button class="currency" id="usd">US Dollar ($)</button>
+          <button class="currency" id="eur">Euro (€)</button>
+          <button class="currency" id="gbp">Pound (£)</button>
+          <button class="currency" id="cny">Yuan (¥)</button>
+        </div>
+      </div>
+      <div id="hourList">
+        <h5>Price Change Percentage by Hour</h5>
+        <div id="currensies">
+          <button class="hour" id="24h">24 Hourly</button>
+          <button class="hour" id="1h">1 Hourly</button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>Developed by <a href="">Enes Eren</a></p>
+      <span id="count"></span>
+    </footer>
+    <div class="overlay hidden"></div>
     <script src="popup.js" defer></script>
     <script src="alert.js"></script>
   </body>
