@@ -192,7 +192,7 @@ button:hover {
 
 .currency:active,
 .hour:active {
-  background: #e76f51;
+  background-color: #6c757d;
 }
 
 .currSign {

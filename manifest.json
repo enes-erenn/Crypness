@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Crypness",
   "version": "1.0",
   "description": "Crypto Alert Extension",
@@ -7,24 +7,23 @@
     "128": "assets/images/icon128.png",
     "32": "assets/images/icon32.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": "assets/images/icon128.png",
     "default_popup": "popup.html"
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "permissions": [
-    "<all_urls>",
-    "contextMenus",
-    "tabs",
-    "notifications",
-    "storage"
-  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "permissions": ["contextMenus", "tabs", "alarms", "notifications", "storage"],
 
   "content_scripts": [
     {
       "run_at": "document_start",
       "matches": ["<all_urls>"],
-      "js": ["popup.js", "alert.js"]
+      "js": ["popup.js"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
