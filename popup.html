@@ -11,7 +11,9 @@
   <body>
     <header id="header">
       <nav id="nav">
-        <div class="aside"></div>
+        <div class="aside">
+          <input type="text" id="search" placeholder="Search" data-search />
+        </div>
 
         <div class="aside">
           <h1 id="heading">Crypness</h1>
@@ -21,7 +23,7 @@
           <button class="buttons">
             <img class="icons" src="./assets/icons/fav.svg" alt="" />
           </button>
-          <button class="buttons">
+          <button id="notifications" class="buttons">
             <img class="icons" src="./assets/icons/bell.svg" alt="" />
           </button>
           <button id="settings" class="buttons">
@@ -32,10 +34,27 @@
     </header>
 
     <main id="main">
-      <div id="coin-list">
+      <div id="coin-list" data-coin-cards-container>
         <div class="loader"></div>
       </div>
     </main>
+
+    <template data-coin-template>
+      <div class="coin">
+        <div class="coin-header">
+          <img src="" class="image" data-image />
+          <h3 class="coin_name" data-name></h3>
+        </div>
+        <div>
+          <h4>Current Value</h4>
+          <span class="price" data-price></span>
+        </div>
+        <div>
+          <h4 data-change-header></h4>
+          <span data-change></span>
+        </div>
+      </div>
+    </template>
 
     <div id="settingsModal" class="hidden modal">
       <div>
@@ -59,6 +78,12 @@
         </div>
       </div>
     </div>
+
+    <div class="hidden">
+      <h5>Notifications</h5>
+      <ul id="notificationList"></ul>
+    </div>
+
     <footer>
       <p>Developed by <a href="">Enes Eren</a></p>
       <span id="count"></span>

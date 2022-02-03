@@ -68,7 +68,7 @@ body {
   display: block;
   font-size: 18px;
   min-width: 5rem;
-  width: 100%;
+  width: 8rem;
   height: 100%;
   padding: 0 0 0 16px;
   margin-top: 1rem;
@@ -179,6 +179,14 @@ h4 {
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   background: #f1faee;
   transition: 100ms ease-in-out;
+}
+
+#search {
+  border-radius: 10px;
+  border: 1px solid gray;
+  width: 100%;
+  outline: none;
+  padding: 2px 6px;
 }
 
 .currency:hover,
