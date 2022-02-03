@@ -69,31 +69,35 @@ currencyBtn.forEach((b) =>
     )
       .then((res) => res.json())
       .then((coins) => {
-        result = coins.map(
-          (coin) =>
-            `
-              <div class="coin" >
-                <div class="coin_header">
-                  <img class="image" src=${coin.image} />
-                  <h3 class="coin_name" >${coin.name}</h3>
-                </div>
-                <div>
-                  <h4>Current Value</h4>
-                  <span>${currSign} ${coin.current_price}</span>
-                </div>
-                <div>
-                  <h4>${currHour} Change</h4>
-                  <span>${
-                    currHour === "24h"
-                      ? coin.price_change_percentage_24h_in_currency.toFixed(2)
-                      : coin.price_change_percentage_1h_in_currency.toFixed(2)
-                  }%</span>
-                </div>
-              </div>
-            `
-        );
-        coinList.innerHTML = result.join("");
-        console.log(coinList.childElementCount);
+        coins = data.map((coin) => {
+          const card = coinCardTemplate.content.cloneNode(true).children[0];
+          const name = card.querySelector("[data-name");
+          const price = card.querySelector("[data-price]");
+          const image = card.querySelector("[data-image]");
+          const change = card.querySelector("[data-change]");
+          const changeHeader = card.querySelector("[data-change-header]");
+          name.textContent = coin.name;
+          price.textContent = `${currSign}${coin.current_price} `;
+          image.src = coin.image;
+          change.textContent = `${
+            currHour === "24h"
+              ? coin.price_change_percentage_24h_in_currency.toFixed(2)
+              : coin.price_change_percentage_1h_in_currency.toFixed(2)
+          }%`;
+          changeHeader.textContent = `${currHour} Change`;
+          coinCardContainer.append(card);
+          loader.classList.add("hidden");
+          count.innerText = `Listed ${coinList.childElementCount} cryptocurrencies`;
+
+          return {
+            image: coin.image,
+            name: coin.id,
+            price: coin.current_price,
+            symbol: coin.symbol,
+            change: coin.price_change_percentage_24h_in_currency.toFixed(2),
+            element: card,
+          };
+        });
       });
   })
 );
@@ -116,10 +120,14 @@ const searchInput = document.querySelector("[data-search]");
 
 searchInput.addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase();
+
   console.log(value);
   coins.forEach((coin) => {
     const isVisible = coin.name.includes(value) || coin.symbol.includes(value);
     coin.element.classList.toggle("hidden", !isVisible);
+    count.innerText = `Listed ${Math.abs(
+      document.getElementsByClassName("coin hidden").length - 250
+    )} cryptocurrencies`;
   });
 });
 
@@ -146,10 +154,8 @@ fetch(
       changeHeader.textContent = `${currHour} Change`;
       coinCardContainer.append(card);
       loader.classList.add("hidden");
+      count.innerText = `Listed ${coinList.childElementCount} cryptocurrencies`;
 
-      count.innerText = `Listed ${
-        coinList.childElementCount - 1
-      } cryptocurrencies`;
       return {
         image: coin.image,
         name: coin.id,

@@ -45,7 +45,7 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 20px;
+  padding: 6px 1.2rem;
 }
 
 #heading {
@@ -55,6 +55,7 @@ body {
 
 #main {
   width: 100%;
+  min-height: 25rem;
 }
 
 .coin_name {
@@ -68,9 +69,9 @@ body {
   display: block;
   font-size: 18px;
   min-width: 5rem;
-  width: 8rem;
+  width: 7rem;
   height: 100%;
-  padding: 0 0 0 16px;
+  padding: 0 0 0 20px;
   margin-top: 1rem;
 }
 
@@ -92,16 +93,17 @@ body {
   border-radius: 50%;
   width: 6rem;
   height: 6rem;
+  position: absolute;
+  top: 40%;
+  left: calc(50% - 6rem / 2);
   animation: spin 2s linear infinite;
 }
 
 #coin-list {
   display: flex;
   grid-template-columns: repeat(auto-fill, 130px);
-  align-items: center;
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  justify-content: center;
   flex-wrap: wrap;
   overflow: scroll;
   max-height: 400px;
@@ -109,6 +111,11 @@ body {
   overflow-x: hidden;
 }
 
+.coin-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
 h4 {
   height: 20px;
 }
@@ -254,7 +261,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.8rem 0 2.5rem;
+  padding: 0 1.2rem;
   bottom: 0;
   font-size: 1rem;
 }
