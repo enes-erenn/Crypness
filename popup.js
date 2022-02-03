@@ -1,13 +1,15 @@
 const coinList = document.getElementById("coin-list");
 const loader = document.querySelector(".loader");
 const settings = document.getElementById("settings");
-const modal = document.querySelector(".modal");
+const modalSettings = document.querySelector(".modalSettings");
+const modalNotifications = document.querySelector(".modalNotifications");
+const modalAlarm = document.querySelector(".modalAlarm");
 const overlay = document.querySelector(".overlay");
-const closeModal = document.querySelector(".close-modal");
 const currensies = document.getElementById("currensies");
 const currencyBtn = document.querySelectorAll(".currency");
 const hours = document.querySelectorAll(".hour");
 const notifications = document.getElementById("notifications");
+const alarm = document.getElementById("alarm");
 let count = document.getElementById("count");
 let result;
 let currency = localStorage.getItem("curr")
@@ -168,16 +170,29 @@ fetch(
   });
 
 settings.addEventListener("click", () => {
-  modal.classList.remove("hidden");
+  modalSettings.classList.remove("hidden");
   overlay.classList.remove("hidden");
 });
 
-closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  overlay.classList.add("hidden");
+notifications.addEventListener("click", () => {
+  modalNotifications.classList.remove("hidden");
+  overlay.classList.remove("hidden");
 });
 
-/* notifications.addEventListener("click", () => {}); */
+alarm.addEventListener("click", () => {
+  modalAlarm.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+});
+
+document.querySelectorAll(".close-modal").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modalSettings.classList.add("hidden");
+    modalNotifications.classList.add("hidden");
+    modalAlarm.classList.add("hidden");
+    overlay.classList.add("hidden");
+  });
+});
+
 /* function handleResponse(message) {
   console.log(`Message from the background script:  ${message.response}`);
 }

@@ -42,10 +42,15 @@ body {
 #nav {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1.5fr 1fr;
   align-items: center;
   justify-content: space-between;
   padding: 6px 1.2rem;
+}
+
+.footer-images {
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 #heading {
@@ -149,14 +154,44 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 10px;
 }
 
 .hidden {
   display: none;
 }
 
-.modal {
+.modalSettings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+  background-color: white;
+  padding: 2rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.modalNotifications {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+  background-color: white;
+  padding: 2rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.modalAlarm {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -244,7 +279,8 @@ button:hover {
   background: gray;
 }
 
-#settings {
+#settings,
+#notifications {
   text-align: center;
 }
 
@@ -256,14 +292,33 @@ button:hover {
   color: #10002b;
 }
 
+#count {
+  text-align: right;
+}
+
 footer {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.2rem;
+  gap: 10px;
   bottom: 0;
   font-size: 1rem;
+  padding: 6px;
+}
+
+.social-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes spin {

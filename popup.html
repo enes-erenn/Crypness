@@ -23,6 +23,9 @@
           <button class="buttons">
             <img class="icons" src="./assets/icons/fav.svg" alt="" />
           </button>
+          <button id="alarm" class="buttons">
+            <img class="icons" src="./assets/icons/alarm-clock.svg" alt="" />
+          </button>
           <button id="notifications" class="buttons">
             <img class="icons" src="./assets/icons/bell.svg" alt="" />
           </button>
@@ -55,7 +58,7 @@
       </div>
     </template>
 
-    <div id="settingsModal" class="hidden modal">
+    <div class="hidden modalSettings">
       <div>
         <h3 id="settings">Settings</h3>
         <button class="close-modal">&times;</button>
@@ -78,13 +81,42 @@
       </div>
     </div>
 
-    <div class="hidden">
-      <h5>Notifications</h5>
-      <ul id="notificationList"></ul>
+    <div class="hidden modalAlarm">
+      <div>
+        <h3 id="settings">Alarm</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div>
+        <h5>Set Alarm</h5>
+      </div>
+    </div>
+
+    <div class="hidden modalNotifications">
+      <div>
+        <h3 id="notifications">Notifications</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div>
+        <ul id="notificationList"></ul>
+      </div>
     </div>
 
     <footer>
-      <p>Developed by <a href="">Enes Eren</a></p>
+      <div>
+        
+      </div>
+      <div class="social-media">
+        <a href="">
+          <img class="footer-images" src="assets\icons\email.png" alt="" />
+        </a>
+        <a href="">
+          <img class="footer-images" src="assets\icons\github.png" alt="" />
+        </a>
+        <a href="">
+          <img class="footer-images" src="assets\icons\linkedin.png" alt="" />
+        </a>
+      </div>
+
       <span id="count"></span>
     </footer>
     <div class="overlay hidden"></div>
