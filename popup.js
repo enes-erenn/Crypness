@@ -17,7 +17,7 @@ let currHour = localStorage.getItem("hour")
   ? localStorage.getItem("hour")
   : "24h";
 
-//chrome.action.setIcon({ path: "assets/images/icon128.png" });
+chrome.action.setIcon({ path: "assets/images/icon128.png" });
 
 document.getElementById(`${currency}`).style.border = "1px solid black";
 document.getElementById(`${currHour}`).style.border = "1px solid black";

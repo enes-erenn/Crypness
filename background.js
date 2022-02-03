@@ -1,12 +1,3 @@
-function notification() {
-  chrome.notifications.create({
-    title: "Crypness",
-    message: "You have a message.",
-    iconUrl: "./assets/images/icon128.png",
-    type: "basic",
-  });
-}
-
 let prevPrice;
 function getFavPrices() {
   fetch(
@@ -25,9 +16,15 @@ function getFavPrices() {
       function setPrice() {
         chrome.storage.sync.set({ key: coins[0].current_price });
       }
+      console.log(currPrice);
       function myFunc() {
-        if (coins[0].current_price % prevPrice > 10) {
-          notification();
+        if (coins[0].current_price % prevPrice > 1000) {
+          chrome.notifications.create({
+            title: "Crypness",
+            message: `${coins[0].name} price is $${coins[0].current_price}`,
+            iconUrl: `${coins[0].image}`,
+            type: "basic",
+          });
           chrome.action.setIcon({ path: "assets/images/update128.png" });
         } else {
           setPrice();
