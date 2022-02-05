@@ -1,216 +1,260 @@
-const coinList = document.getElementById("coin-list");
-const loader = document.querySelector(".loader");
-const settings = document.getElementById("settings");
-const modalSettings = document.querySelector(".modalSettings");
-const modalNotifications = document.querySelector(".modalNotifications");
-const modalAlarm = document.querySelector(".modalAlarm");
-const overlay = document.querySelector(".overlay");
-const currensies = document.getElementById("currensies");
-const currencyBtn = document.querySelectorAll(".currency");
-const hours = document.querySelectorAll(".hour");
-const notifications = document.getElementById("notifications");
-const alarm = document.getElementById("alarm");
-let count = document.getElementById("count");
-let result;
-let currency = localStorage.getItem("curr")
-  ? localStorage.getItem("curr")
-  : "usd";
+const coinList = document.getElementById("coin-list"),
+  loader = document.querySelector(".loader"),
+  settings = document.getElementById("settings"),
+  modalSettings = document.querySelector(".modalSettings"),
+  modalNotifications = document.querySelector(".modalNotifications"),
+  modalAlarm = document.querySelector(".modalAlarm"),
+  overlay = document.querySelector(".overlay"),
+  currensies = document.getElementById("currensies"),
+  currencyBtn = document.querySelectorAll(".currency"),
+  hours = document.querySelectorAll(".hour"),
+  notifications = document.getElementById("notifications"),
+  alarm = document.getElementById("alarm"),
+  testBtn = document.getElementById("test-btn"),
+  testInfoBtn = document.querySelector(".test-info-btn");
+alarmInfoBtn = document.querySelector(".alarm-info-btn");
+let result,
+  coins = [],
+  favs =
+    localStorage.getItem("favs") === null
+      ? []
+      : [localStorage.getItem("favs").split(",")],
+  count = document.getElementById("count"),
+  currency = localStorage.getItem("curr")
+    ? localStorage.getItem("curr")
+    : "usd",
+  currHour = localStorage.getItem("hour")
+    ? localStorage.getItem("hour")
+    : "24h";
 
-let currHour = localStorage.getItem("hour")
-  ? localStorage.getItem("hour")
-  : "24h";
-
-// chrome.action.setIcon({ path: "assets/images/icon128.png" });
-
-document.getElementById(`${currency}`).style.border = "1px solid black";
-document.getElementById(`${currHour}`).style.border = "1px solid black";
-
-hours.forEach((h) =>
-  h.addEventListener("click", (e) => {
-    currHour = e.target.id;
-    currHour === "24h"
-      ? localStorage.setItem("hour", "24h")
-      : localStorage.setItem("hour", "1h");
-    document.querySelectorAll(".hour").forEach((h) => {
-      h.style.border = "1px solid transparent";
-      h.style = "b:hover {border: 1px solid transparent";
-    });
-    e.target.style.border = "1px solid black";
-    window.location.reload();
-  })
-);
-
-currencyBtn.forEach((b) =>
-  b.addEventListener("click", (e) => {
-    currency = e.target.id;
-    document.querySelectorAll(".currency").forEach((b) => {
-      b.style.border = "1px solid transparent";
-      b.style = "b:hover {border: 1px solid transparent";
-    });
-    e.target.style.border = "1px solid black";
-    window.location.reload();
-    let currSign = setCurr(currency);
-
-    function setCurr(c) {
-      if (c === "eur") {
-        localStorage.setItem("curr", "eur");
-        return "€";
-      } else if (c === "gbp") {
-        localStorage.setItem("curr", "gbp");
-        return "£";
-      } else if (c === "cny") {
-        localStorage.setItem("curr", "cny");
-        return "元";
-      } else {
-        localStorage.setItem("curr", "usd");
-        return "$";
-      }
-    }
-    fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h,24h`
-    )
-      .then((res) => res.json())
-      .then((coins) => {
-        coins = data.map((coin) => {
-          const card = coinCardTemplate.content.cloneNode(true).children[0];
-          const name = card.querySelector("[data-name");
-          const price = card.querySelector("[data-price]");
-          const image = card.querySelector("[data-image]");
-          const change = card.querySelector("[data-change]");
-          const changeHeader = card.querySelector("[data-change-header]");
-          name.textContent = coin.name;
-          price.textContent = `${currSign}${coin.current_price} `;
-          image.src = coin.image;
-          change.textContent = `${
-            currHour === "24h"
-              ? coin.price_change_percentage_24h_in_currency.toFixed(2)
-              : coin.price_change_percentage_1h_in_currency.toFixed(2)
-          }%`;
-          changeHeader.textContent = `${currHour} Change`;
-          coinCardContainer.append(card);
-          loader.classList.add("hidden");
-          count.innerText = `Listed ${coinList.childElementCount} cryptocurrencies`;
-
-          return {
-            image: coin.image,
-            name: coin.id,
-            price: coin.current_price,
-            symbol: coin.symbol,
-            change: coin.price_change_percentage_24h_in_currency.toFixed(2),
-            element: card,
-          };
+(document.getElementById(`${currHour}`).style.border = "1px solid black"),
+  hours.forEach((e) =>
+    e.addEventListener("click", (e) => {
+      "24h" === (currHour = e.target.id)
+        ? localStorage.setItem("hour", "24h")
+        : localStorage.setItem("hour", "1h"),
+        document.querySelectorAll(".hour").forEach((e) => {
+          (e.style.border = "1px solid transparent"),
+            (e.style = "b:hover {border: 1px solid transparent");
+        }),
+        (e.target.style.border = "1px solid black"),
+        window.location.reload();
+    })
+  ),
+  currencyBtn.forEach((e) =>
+    e.addEventListener("click", (e) => {
+      (currency = e.target.id),
+        document.querySelectorAll(".currency").forEach((e) => {
+          (e.style.border = "1px solid transparent"),
+            (e.style = "b:hover {border: 1px solid transparent");
+        }),
+        (e.target.style.border = "1px solid black"),
+        window.location.reload();
+      let t = (function (e) {
+        return "eur" === e
+          ? (localStorage.setItem("curr", "eur"), "€")
+          : "gbp" === e
+          ? (localStorage.setItem("curr", "gbp"), "£")
+          : "cny" === e
+          ? (localStorage.setItem("curr", "cny"), "元")
+          : (localStorage.setItem("curr", "usd"), "$");
+      })(currency);
+      fetch(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h,24h`
+      )
+        .then((e) => e.json())
+        .then((e) => {
+          data.map((e) => {
+            const r = coinCardTemplate.content.cloneNode(!0).children[0],
+              c = r.querySelector("[data-name"),
+              n = r.querySelector("[data-price]"),
+              o = r.querySelector("[data-image]"),
+              a = r.querySelector("[data-change]"),
+              i = r.querySelector("[data-change-header]");
+            return (
+              (c.textContent = e.name),
+              (n.textContent = `${t}${e.current_price} `),
+              (o.src = e.image),
+              (a.textContent = `${
+                "24h" === currHour
+                  ? e.price_change_percentage_24h_in_currency.toFixed(2)
+                  : e.price_change_percentage_1h_in_currency.toFixed(2)
+              }%`),
+              (i.textContent = `${currHour} Change`),
+              coinCardContainer.append(r),
+              loader.classList.add("hidden"),
+              (count.innerText = `Listed ${coinList.childElementCount} cryptocurrencies`),
+              {
+                image: e.image,
+                name: e.id,
+                price: e.current_price,
+                symbol: e.symbol,
+                change: e.price_change_percentage_24h_in_currency.toFixed(2),
+                element: r,
+              }
+            );
+          });
         });
-      });
-  })
-);
+    })
+  );
 
 let currSign = setCurr(currency);
 
-function setCurr(c) {
-  if (c === "eur") return "€";
-  else if (c === "gbp") return "£";
-  else if (c === "cny") return "¥";
-  else {
-    return "$";
-  }
+function setCurr(e) {
+  return "eur" === e ? "€" : "gbp" === e ? "£" : "cny" === e ? "¥" : "$";
 }
 
-let coins = [];
-const coinCardTemplate = document.querySelector("[data-coin-template]");
-const coinCardContainer = document.querySelector("[data-coin-cards-container]");
-const searchInput = document.querySelector("[data-search]");
-
+const coinCardTemplate = document.querySelector("[data-coin-template]"),
+  coinCardContainer = document.querySelector("[data-coin-cards-container]"),
+  searchInput = document.querySelector("[data-search]");
 searchInput.addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
-
-  console.log(value);
-  coins.forEach((coin) => {
-    const isVisible = coin.name.includes(value) || coin.symbol.includes(value);
-    coin.element.classList.toggle("hidden", !isVisible);
-    count.innerText = `Listed ${Math.abs(
-      document.getElementsByClassName("coin hidden").length - 250
-    )} cryptocurrencies`;
-  });
-});
-
-fetch(
-  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h,24h"
-)
-  .then((res) => res.json())
-  .then((data) => {
-    coins = data.map((coin) => {
-      const card = coinCardTemplate.content.cloneNode(true).children[0];
-      const name = card.querySelector("[data-name");
-      const price = card.querySelector("[data-price]");
-      const image = card.querySelector("[data-image]");
-      const change = card.querySelector("[data-change]");
-      const changeHeader = card.querySelector("[data-change-header]");
-      name.textContent = coin.name;
-      price.textContent = `${currSign}${coin.current_price} `;
-      image.src = coin.image;
-      change.textContent = `${
-        currHour === "24h"
-          ? coin.price_change_percentage_24h_in_currency.toFixed(2)
-          : coin.price_change_percentage_1h_in_currency.toFixed(2)
-      }%`;
-      changeHeader.textContent = `${currHour} Change`;
-      coinCardContainer.append(card);
-      loader.classList.add("hidden");
-      count.innerText = `Listed ${coinList.childElementCount} cryptocurrencies`;
-
-      return {
-        image: coin.image,
-        name: coin.id,
-        price: coin.current_price,
-        symbol: coin.symbol,
-        change: coin.price_change_percentage_24h_in_currency.toFixed(2),
-        element: card,
-      };
+  const t = e.target.value.toLowerCase();
+  console.log(t),
+    coins.forEach((e) => {
+      const r = e.name.includes(t) || e.symbol.includes(t);
+      e.element.classList.toggle("hidden", !r),
+        (count.innerText = `Listed ${Math.abs(
+          document.getElementsByClassName("coin hidden").length - 250
+        )} cryptocurrencies`);
     });
-  });
+}),
+  fetch(
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h,24h"
+  )
+    .then((e) => e.json())
+    .then((e) => {
+      coins = e.map((e) => {
+        const t = coinCardTemplate.content.cloneNode(!0).children[0],
+          r = t.querySelector("[data-name"),
+          c = t.querySelector("[data-price]"),
+          n = t.querySelector("[data-image]"),
+          o = t.querySelector("[data-change]"),
+          a = t.querySelector("[data-change-header]");
+        return (
+          (r.textContent = e.name),
+          (c.textContent = `${currSign}${e.current_price} `),
+          (n.src = e.image),
+          (o.textContent = `${
+            "24h" === currHour
+              ? e.price_change_percentage_24h_in_currency.toFixed(2)
+              : e.price_change_percentage_1h_in_currency.toFixed(2)
+          }%`),
+          (a.textContent = `${currHour} Change`),
+          coinCardContainer.append(t),
+          o.innerHTML.includes("-") > 0.0
+            ? (o.style = "background-color: #ae2012")
+            : (o.style = "background-color: #2d6a4f"),
+          loader.classList.add("hidden"),
+          (count.innerText = `Listed ${coinList.childElementCount} cryptocurrencies`),
+          {
+            image: e.image,
+            name: e.id,
+            price: e.current_price,
+            symbol: e.symbol,
+            change: e.price_change_percentage_24h_in_currency.toFixed(2),
+            element: t,
+          }
+        );
+      });
+      document.querySelectorAll(".coin").forEach((c) => {
+        c.addEventListener("mouseover", (e) => {
+          if (
+            localStorage.getItem("favs") &&
+            favs[0].includes(
+              e.target.closest(".coin").querySelector(".coin_name").innerHTML
+            )
+          ) {
+            e.target.closest(".coin").querySelector(".favs").src =
+              "assets/icons/fav-after.png";
+            e.target
+              .closest(".coin")
+              .querySelector("#fav-btn")
+              .classList.remove("hidden");
+          } else {
+            e.target.closest(".coin").querySelector(".favs").src =
+              "assets/icons/fav-before.png";
+            e.target
+              .closest(".coin")
+              .querySelector("#fav-btn")
+              .classList.remove("hidden");
+          }
+        });
+      }),
+        document.querySelectorAll(".coin").forEach((c) => {
+          c.addEventListener("mouseout", (e) => {
+            e.target
+              .closest(".coin")
+              .querySelector("#fav-btn")
+              .classList.add("hidden");
+          });
+        }),
+        document.querySelectorAll("#fav-btn").forEach((c) => {
+          c.addEventListener("click", (e) => {
+            if (
+              favs[0] !== undefined &&
+              Boolean(
+                favs[0].includes(
+                  e.target.closest(".coin").querySelector(".coin_name")
+                    .innerHTML
+                )
+              ) === true
+            ) {
+              e.target.closest(".coin").querySelector(".favs").src =
+                "assets/icons/fav-before.png";
+              favs[0].splice(
+                favs[0]
+                  .indexOf(
+                    e.target.closest(".coin").querySelector(".coin_name")
+                      .innerHTML
+                  )
+                  .toString(),
+                "1"
+              );
+              localStorage.setItem("favs", favs);
+              location.reload();
+            } else {
+              e.target.closest(".coin").querySelector(".favs").src =
+                "assets/icons/fav-after.png";
+
+              favs.push(
+                e.target.closest(".coin").querySelector(".coin_name").innerHTML
+              );
+              localStorage.setItem("favs", favs);
+              e.target.closest(".coin").querySelector(".favs").src =
+                "assets/icons/fav-after.png";
+              location.reload();
+            }
+          });
+        });
+    });
 
 settings.addEventListener("click", () => {
-  modalSettings.classList.remove("hidden");
-  overlay.classList.remove("hidden");
-});
-
-notifications.addEventListener("click", () => {
-  modalNotifications.classList.remove("hidden");
-  overlay.classList.remove("hidden");
-});
-
-alarm.addEventListener("click", () => {
-  modalAlarm.classList.remove("hidden");
-  overlay.classList.remove("hidden");
-});
-
-document.querySelectorAll(".close-modal").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modalSettings.classList.add("hidden");
-    modalNotifications.classList.add("hidden");
-    modalAlarm.classList.add("hidden");
-    overlay.classList.add("hidden");
+  modalSettings.classList.remove("hidden"), overlay.classList.remove("hidden");
+}),
+  notifications.addEventListener("click", () => {
+    modalNotifications.classList.remove("hidden"),
+      overlay.classList.remove("hidden");
+  }),
+  alarm.addEventListener("click", () => {
+    modalAlarm.classList.remove("hidden"), overlay.classList.remove("hidden");
+  }),
+  testBtn.addEventListener("click", () => {
+    chrome.runtime.sendMessage("send a test notification", function () {
+      console.log("test request");
+    });
+  }),
+  testInfoBtn.addEventListener("click", () => {
+    document.querySelector(".test-des").classList.toggle("hidden");
   });
+alarmInfoBtn.addEventListener("click", () => {
+  document.querySelector(".alert-des").classList.toggle("hidden");
 });
-
-/* function handleResponse(message) {
-  console.log(`Message from the background script:  ${message.response}`);
-}
-
-function handleError(error) {
-  console.log(`Error: ${error}`);
-}
-
-function notifyBackgroundPage(e) {
-  var sending = chrome.runtime.sendMessage({
-    greeting: "Greeting from the content script",
+(document.getElementById(`${currency}`).style.border = "1px solid black"),
+  document.querySelectorAll(".close-modal").forEach((e) => {
+    e.addEventListener("click", () => {
+      modalSettings.classList.add("hidden"),
+        modalNotifications.classList.add("hidden"),
+        modalAlarm.classList.add("hidden"),
+        overlay.classList.add("hidden");
+    });
   });
-  sending.then(handleResponse, handleError);
-}
-
-window.addEventListener("click", notifyBackgroundPage); */
-/* 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  console.log(input.value);
-}); */

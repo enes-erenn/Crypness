@@ -43,6 +43,9 @@
 
     <template data-coin-template>
       <div class="coin">
+        <button id="fav-btn" class="hidden">
+          <img class="favs" src="assets\icons\fav-before.png" alt="" />
+        </button>
         <div class="coin-header">
           <img src="" class="image" data-image />
           <h3 class="coin_name" data-name></h3>
@@ -53,7 +56,7 @@
         </div>
         <div>
           <h4 data-change-header></h4>
-          <span data-change></span>
+          <span class="change" data-change></span>
         </div>
       </div>
     </template>
@@ -81,13 +84,59 @@
       </div>
     </div>
 
-    <div class="hidden modalAlarm">
+    <div class="hidden modalAlarm box">
       <div>
-        <h3 id="settings">Alarm</h3>
+        <h4 id="settings">Alarm</h4>
         <button class="close-modal">&times;</button>
       </div>
-      <div>
-        <h5>Set Alarm</h5>
+      <div class="box">
+        <div>
+          <div class="alarm-header">
+            <h5>Set Alarm</h5>
+            <button class="alarm-info-btn info-btn">
+              <img class="info-img" src="assets\icons\info.png" alt="" />
+            </button>
+          </div>
+
+          <div class="alert-settings">
+            <div>
+              <div class="alert-inputs">
+                <label for="changeInput">Change Percantage</label>
+                <input id="changeInput" type="text" value="5%" disabled />
+              </div>
+              <div class="alert-inputs">
+                <label for="timeInput">Time</label>
+                <input type="text" id="timeInput" value="1 Hour" disabled />
+              </div>
+            </div>
+            <div>
+              <p class="alert-des hidden">
+                Change Percentage indicates the change rate of the currency.
+                When a currency changes at this rate, an alert is triggered and
+                sends a notification. And Time determines when the trigger
+                happens. If it is 1 hour, every hour it will check that is there
+                a trigger.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="test-div">
+          <div class="test-header">
+            <h5>Test Notification</h5>
+            <button class="info-btn test-info-btn">
+              <img class="info-img" src="assets\icons\info.png" alt="" />
+            </button>
+          </div>
+
+          <div class="test">
+            <button class="buttons" id="test-btn">Test</button>
+            <p class="test-des hidden">
+              This is a Test Button. This event sends a test notification to
+              your browser. If you are not getting any notifications, please
+              active your notifications from your browser
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -102,18 +151,20 @@
     </div>
 
     <footer>
-      <div>
-        
-      </div>
+      <div></div>
       <div class="social-media">
-        <a href="">
-          <img class="footer-images" src="assets\icons\email.png" alt="" />
+        <a href="mailto:eneserendev@gmail.com" target="_blank">
+          <img class="footer-images" src="assets\icons\email.png" alt="icon" />
         </a>
-        <a href="">
-          <img class="footer-images" src="assets\icons\github.png" alt="" />
+        <a href="https://github.com/thenesern" target="_blank">
+          <img class="footer-images" src="assets\icons\github.png" alt="icon" />
         </a>
-        <a href="">
-          <img class="footer-images" src="assets\icons\linkedin.png" alt="" />
+        <a href="https://www.linkedin.com/in/eneseren1/" target="_blank">
+          <img
+            class="footer-images"
+            src="assets\icons\linkedin.png"
+            alt="icon"
+          />
         </a>
       </div>
 

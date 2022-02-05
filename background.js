@@ -34,11 +34,18 @@ function getFavPrices() {
 }
 setInterval(getFavPrices, 3600000);
 
-/* 
-function handleMessage(request, sender, sendResponse) {
-  console.log("Message from the content script: " + request.greeting);
-  sendResponse({ response: "Response from background script" });
-}
+chrome.runtime.onMessage.addListener((message, sender, data) => {
+  console.log(message);
+  data = JSON.stringify(data);
+});
 
-chrome.runtime.onMessage.addListener(handleMessage);
- */
+chrome.runtime.onMessage.addListener((message, sender, data) => {
+  if (message === "send a test notification") {
+    chrome.notifications.create({
+      title: "Crypness",
+      message: "This is a test notification",
+      iconUrl: "assets/images/update128.png",
+      type: "basic",
+    });
+  }
+});

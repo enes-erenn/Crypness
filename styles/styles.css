@@ -37,15 +37,40 @@ body {
 
 #header {
   width: 100%;
+  padding: 4px 10px;
+}
+.test-div {
+  padding-top: 1rem;
 }
 
+.alert-des {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+.alert-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-direction: row;
+  gap: 1rem;
+}
 #nav {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 1.2rem;
+}
+.alert-des {
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 3.6rem;
+}
+#test-btn {
+  min-width: 6em;
+  height: 3rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid gray;
 }
 
 .footer-images {
@@ -63,6 +88,16 @@ body {
   min-height: 25rem;
 }
 
+.favs {
+  width: 1rem;
+  background-color: #eee;
+}
+
+#fav-btn {
+  border: none;
+  background: transparent;
+}
+
 .coin_name {
   font-size: 18px;
   margin-left: 6px;
@@ -71,6 +106,7 @@ body {
 }
 
 .coin {
+  position: relative;
   display: block;
   font-size: 18px;
   min-width: 5rem;
@@ -121,9 +157,6 @@ body {
   align-items: center;
   justify-content: flex-start;
 }
-h4 {
-  height: 20px;
-}
 
 .icons {
   width: 20px;
@@ -144,6 +177,49 @@ h4 {
 
 .buttons:hover {
   background-color: #d6ccc2;
+}
+
+.test-des {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.info-btn {
+  border: none;
+  background: transparent;
+}
+.box {
+  display: block;
+  align-items: center;
+  justify-content: flex-start;
+}
+.test-header,
+.alarm-header {
+  display: flex;
+  gap: 10px;
+}
+.info-img {
+  width: 1rem;
+  height: 1rem;
+}
+#changeInput,
+#timeInput {
+  width: 4rem;
+}
+
+.change {
+  padding: 0 30%;
+  border-radius: 4px;
+}
+#fav-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.test {
+  display: flex;
+  gap: 1rem;
 }
 
 .buttons:active {
@@ -169,7 +245,7 @@ h4 {
   width: 80%;
   height: 60%;
   background-color: white;
-  padding: 2rem;
+  padding: 1rem 1.2rem;
   font-size: 1.6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
@@ -184,22 +260,31 @@ h4 {
   width: 80%;
   height: 60%;
   background-color: white;
-  padding: 2rem;
+  padding: 1rem 1.2rem;
   font-size: 1.6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
+.alert-inputs {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+}
 
+label {
+  font-size: 1.2rem;
+  line-height: 1rem;
+}
 .modalAlarm {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  height: 60%;
+  height: 56%;
   background-color: white;
-  padding: 2rem;
+  padding: 1rem 1.2rem;
   font-size: 1.6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
@@ -294,6 +379,7 @@ button:hover {
 
 #count {
   text-align: right;
+  padding: 0 10px;
 }
 
 footer {
