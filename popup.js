@@ -11,8 +11,9 @@ const coinList = document.getElementById("coin-list"),
   notifications = document.getElementById("notifications"),
   alarm = document.getElementById("alarm"),
   testBtn = document.getElementById("test-btn"),
-  testInfoBtn = document.querySelector(".test-info-btn");
-alarmInfoBtn = document.querySelector(".alarm-info-btn");
+  testInfoBtn = document.querySelector(".test-info-btn"),
+  alarmInfoBtn = document.querySelector(".alarm-info-btn"),
+  favsBtn = document.getElementById("fav");
 let result,
   coins = [],
   favs =
@@ -109,14 +110,13 @@ const coinCardTemplate = document.querySelector("[data-coin-template]"),
   searchInput = document.querySelector("[data-search]");
 searchInput.addEventListener("input", (e) => {
   const t = e.target.value.toLowerCase();
-  console.log(t),
-    coins.forEach((e) => {
-      const r = e.name.includes(t) || e.symbol.includes(t);
-      e.element.classList.toggle("hidden", !r),
-        (count.innerText = `Listed ${Math.abs(
-          document.getElementsByClassName("coin hidden").length - 250
-        )} cryptocurrencies`);
-    });
+  coins.forEach((e) => {
+    const r = e.name.includes(t) || e.symbol.includes(t);
+    e.element.classList.toggle("hidden", !r),
+      (count.innerText = `Listed ${Math.abs(
+        document.getElementsByClassName("coin hidden").length - 250
+      )} cryptocurrencies`);
+  });
 }),
   fetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h,24h"
@@ -238,18 +238,34 @@ settings.addEventListener("click", () => {
   alarm.addEventListener("click", () => {
     modalAlarm.classList.remove("hidden"), overlay.classList.remove("hidden");
   }),
-  testBtn.addEventListener("click", () => {
-    chrome.runtime.sendMessage("send a test notification", function () {
-      console.log("test request");
-    });
-  }),
+  favsBtn.addEventListener("click", () => {
+    if (document.getElementById("fav-img").src.includes("fav.svg") === true) {
+      document.querySelectorAll(".coin").forEach((c) => {
+        document.getElementById("fav-img").src = "assets/icons/fav-after.png";
+        c.classList.add("hidden");
+
+        favs[0].map((f) =>
+          c.querySelector(".coin_name").innerHTML === f
+            ? c.classList.remove("hidden")
+            : ""
+        );
+      });
+    } else {
+      location.reload();
+    }
+  });
+testBtn.addEventListener("click", () => {
+  chrome.runtime.sendMessage("send a test notification", function () {
+    console.log("test request");
+  });
+}),
   testInfoBtn.addEventListener("click", () => {
     document.querySelector(".test-des").classList.toggle("hidden");
   });
 alarmInfoBtn.addEventListener("click", () => {
   document.querySelector(".alert-des").classList.toggle("hidden");
 });
-(document.getElementById(`${currency}`).style.border = "1px solid black"),
+(document.getElementById(`${currency}`).style = "border: 1px solid black"),
   document.querySelectorAll(".close-modal").forEach((e) => {
     e.addEventListener("click", () => {
       modalSettings.classList.add("hidden"),

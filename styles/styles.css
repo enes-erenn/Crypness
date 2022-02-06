@@ -378,26 +378,27 @@ button:hover {
 }
 
 #count {
-  text-align: right;
-  padding: 0 10px;
+  text-align: left;
 }
 
 footer {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   bottom: 0;
   font-size: 1rem;
-  padding: 6px;
+  padding: 4px 16px 4px 10px;
 }
-
+.display {
+  display: block;
+}
 .social-media {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 10px;
 }
 
