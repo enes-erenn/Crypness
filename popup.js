@@ -31,7 +31,7 @@ let result,
 (document.getElementById(`${currHour}`).style.border = "1px solid black"),
   hours.forEach((e) =>
     e.addEventListener("click", (e) => {
-      "24h" === (currHour = e.target.id)
+      "24h" === e.target.id
         ? localStorage.setItem("hour", "24h")
         : localStorage.setItem("hour", "1h"),
         document.querySelectorAll(".hour").forEach((e) => {

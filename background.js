@@ -4,37 +4,43 @@ function getFavPrices() {
   )
     .then((res) => res.json())
     .then((coins) => {
-      chrome.storage.local.get(["key"], function (result) {
+      chrome.storage.sync.get(["key"], function (result) {
+        console.log(result.key);
+        console.log(coins[0].price_change_percentage_1h_in_currency.toFixed(2));
         if (
-          coins[0].price_change_percentage_1h_in_currency.toFixed(2) >= 5 &&
-          result.key !==
-            coins[0].price_change_percentage_1h_in_currency.toFixed(2)
+          (result.key !==
+            coins[0].price_change_percentage_1h_in_currency.toFixed(2)) ===
+            true &&
+          coins[0].price_change_percentage_1h_in_currency.toFixed(2) >= 5 ===
+            true
         ) {
-          sendNotification();
+          console.log("trigerred");
+          chrome.notifications.create({
+            title: "Crypness",
+            message: `${coins[0].name} price is $${coins[0].current_price}`,
+            iconUrl: `${coins[0].image}`,
+            type: "basic",
+          });
+          chrome.action.setIcon({ path: "assets/images/update128.png" });
         } else {
           return;
         }
       });
 
-      function sendNotification() {
-        chrome.storage.local.set(
-          { key: coins[0].price_change_percentage_1h_in_currency.toFixed(2) },
-          function () {}
-        );
-
-        chrome.notifications.create({
-          title: "Crypness",
-          message: `${coins[0].name} price is $${coins[0].current_price}`,
-          iconUrl: `${coins[0].image}`,
-          type: "basic",
-        });
-        chrome.action.setIcon({ path: "assets/images/update128.png" });
-      }
+      chrome.storage.sync.set(
+        { key: coins[0].price_change_percentage_1h_in_currency.toFixed(2) },
+        function () {
+          console.log(
+            "Value is set to " +
+              coins[0].price_change_percentage_1h_in_currency.toFixed(2)
+          );
+        }
+      );
     });
 }
 
-setInterval(getFavPrices, 3600000);
-
+setInterval(getFavPrices, 1800000);
+/* 
 chrome.runtime.onMessage.addListener((message, sender, data) => {
   console.log(message);
   data = JSON.stringify(data);
@@ -50,3 +56,4 @@ chrome.runtime.onMessage.addListener((message, sender, data) => {
     });
   }
 });
+ */
