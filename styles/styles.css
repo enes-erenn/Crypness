@@ -208,7 +208,14 @@ body {
 }
 
 .change {
-  padding: 0 30%;
+  font-size: 1.2rem;
+  width: 100%;
+  padding-top: 1px;
+  font-weight: 400;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
 }
 #fav-btn {
