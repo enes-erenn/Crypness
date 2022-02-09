@@ -21,10 +21,10 @@ let result,
       ? []
       : [localStorage.getItem("favs").split(",")],
   count = document.getElementById("count"),
+  deneme,
   currency = localStorage.getItem("curr") || "usd",
   currHour = localStorage.getItem("hour") || "24h";
-
-document.getElementById(`${currHour}`).classList.add("default"),
+document.getElementById(currHour).classList.add("default"),
   hours.forEach((e) =>
     e.addEventListener("click", (e) => {
       "24h" === e.target.id
@@ -250,7 +250,7 @@ testBtn.addEventListener("click", () => {
 alarmInfoBtn.addEventListener("click", () => {
   document.querySelector(".alert-des").classList.toggle("hidden");
 });
-document.getElementById(`${currency}`).classList.add("default"),
+document.getElementById(currency).classList.add("default"),
   document.querySelectorAll(".close-modal").forEach((e) => {
     e.addEventListener("click", () => {
       modalSettings.classList.add("hidden"),
@@ -259,3 +259,5 @@ document.getElementById(`${currency}`).classList.add("default"),
         overlay.classList.add("hidden");
     });
   });
+
+localStorage.getItem("favs") ? (favsBtn.style.display = "block") : "";

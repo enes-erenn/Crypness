@@ -110,17 +110,19 @@
                 <input id="changeInput" type="text" value="5%" disabled />
               </div>
               <div class="alert-inputs">
-                <label for="timeInput">Time</label>
+                <label for="timeInput">Auto Check</label>
                 <input type="text" id="timeInput" value="1 Hour" disabled />
+              </div>
+              <div class="alert-inputs">
+                <label for="targetItem">Target</label>
+                <input type="text" id="targetItem" value="BTC" disabled />
               </div>
             </div>
             <div>
               <p class="alert-des hidden">
                 Change Percentage indicates the change rate of the currency.
                 When a currency changes at this rate, an alert is triggered and
-                sends a notification. And Time determines when the trigger
-                happens. If it is 1 hour, every hour it will check that is there
-                a trigger.
+                sends a notification. This will be checked every half hour.
               </p>
             </div>
           </div>

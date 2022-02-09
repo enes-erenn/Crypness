@@ -60,13 +60,9 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.alert-des {
-  overflow: scroll;
-  overflow-x: hidden;
-  max-height: 3.6rem;
-}
+
 #test-btn {
-  min-width: 6em;
+  min-width: 4rem;
   height: 3rem;
   padding: 4px 10px;
   border-radius: 4px;
@@ -96,6 +92,10 @@ body {
 #fav-btn {
   border: none;
   background: transparent;
+}
+
+#fav {
+  display: none;
 }
 
 .coin_name {
@@ -203,8 +203,10 @@ body {
   height: 1rem;
 }
 #changeInput,
-#timeInput {
+#timeInput,
+#targetItem {
   width: 4rem;
+  font-size: 12px;
 }
 
 .change {
@@ -290,7 +292,7 @@ label {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  height: 56%;
+  height: 60%;
   background-color: white;
   padding: 1rem 1.2rem;
   font-size: 1.6rem;
@@ -375,6 +377,10 @@ button:hover {
 #settings,
 #notifications {
   text-align: center;
+}
+
+#notifications {
+  display: none;
 }
 
 #hourList {
