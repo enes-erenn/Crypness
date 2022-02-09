@@ -21,36 +21,21 @@ let result,
       ? []
       : [localStorage.getItem("favs").split(",")],
   count = document.getElementById("count"),
-  currency = localStorage.getItem("curr")
-    ? localStorage.getItem("curr")
-    : "usd",
-  currHour = localStorage.getItem("hour")
-    ? localStorage.getItem("hour")
-    : "24h";
+  currency = localStorage.getItem("curr") || "usd",
+  currHour = localStorage.getItem("hour") || "24h";
 
-(document.getElementById(`${currHour}`).style.border = "1px solid black"),
+document.getElementById(`${currHour}`).classList.add("default"),
   hours.forEach((e) =>
     e.addEventListener("click", (e) => {
       "24h" === e.target.id
         ? localStorage.setItem("hour", "24h")
         : localStorage.setItem("hour", "1h"),
-        document.querySelectorAll(".hour").forEach((e) => {
-          (e.style.border = "1px solid transparent"),
-            (e.style = "b:hover {border: 1px solid transparent");
-        }),
-        (e.target.style.border = "1px solid black"),
-        window.location.reload();
+        location.reload();
     })
   ),
   currencyBtn.forEach((e) =>
     e.addEventListener("click", (e) => {
-      (currency = e.target.id),
-        document.querySelectorAll(".currency").forEach((e) => {
-          (e.style.border = "1px solid transparent"),
-            (e.style = "b:hover {border: 1px solid transparent");
-        }),
-        (e.target.style.border = "1px solid black"),
-        window.location.reload();
+      (currency = e.target.id), window.location.reload();
       let t = (function (e) {
         return "eur" === e
           ? (localStorage.setItem("curr", "eur"), "€")
@@ -265,7 +250,7 @@ testBtn.addEventListener("click", () => {
 alarmInfoBtn.addEventListener("click", () => {
   document.querySelector(".alert-des").classList.toggle("hidden");
 });
-(document.getElementById(`${currency}`).style = "border: 1px solid black"),
+document.getElementById(`${currency}`).classList.add("default"),
   document.querySelectorAll(".close-modal").forEach((e) => {
     e.addEventListener("click", () => {
       modalSettings.classList.add("hidden"),

@@ -444,3 +444,7 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
+
+.default {
+  border: 1px solid black;
+}

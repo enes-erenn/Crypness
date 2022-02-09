@@ -8,11 +8,13 @@ function getFavPrices() {
         console.log(result.key);
         console.log(coins[0].price_change_percentage_1h_in_currency.toFixed(2));
         if (
-          (result.key !==
+          (((result.key !==
             coins[0].price_change_percentage_1h_in_currency.toFixed(2)) ===
             true &&
-          coins[0].price_change_percentage_1h_in_currency.toFixed(2) >= 5 ===
-            true
+            coins[0].price_change_percentage_1h_in_currency.toFixed(2) >= 5 ===
+              true) ||
+            coins[0].price_change_percentage_1h_in_currency.toFixed(2) <= 5 ===
+              true) === true
         ) {
           console.log("trigerred");
           chrome.notifications.create({
@@ -40,7 +42,7 @@ function getFavPrices() {
 }
 
 setInterval(getFavPrices, 1800000);
-/* 
+
 chrome.runtime.onMessage.addListener((message, sender, data) => {
   console.log(message);
   data = JSON.stringify(data);
@@ -56,4 +58,3 @@ chrome.runtime.onMessage.addListener((message, sender, data) => {
     });
   }
 });
- */
