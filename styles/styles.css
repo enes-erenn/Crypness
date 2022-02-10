@@ -242,6 +242,10 @@ body {
   gap: 10px;
 }
 
+.aside:last-child {
+  justify-content: flex-end;
+}
+
 .hidden {
   display: none;
 }
@@ -375,18 +379,24 @@ button:hover {
 }
 
 #settings,
-#notifications {
+#notification-header {
   text-align: center;
 }
-
-#notifications {
-  display: none;
+li {
+  list-style: none;
 }
-
 #hourList {
   margin-top: 2rem;
 }
-
+.delete-notifications {
+  position: absolute;
+  bottom: 5%;
+  right: 3%;
+  float: right;
+  padding: 4px 6px;
+  background-color: transparent;
+  border: 1px solid gray;
+}
 .headers {
   color: #10002b;
 }

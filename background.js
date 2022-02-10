@@ -13,7 +13,7 @@ function getFavPrices() {
             true &&
             coins[0].price_change_percentage_1h_in_currency.toFixed(2) >= 5 ===
               true) ||
-            coins[0].price_change_percentage_1h_in_currency.toFixed(2) <= 5 ===
+            coins[0].price_change_percentage_1h_in_currency.toFixed(2) <= -5 ===
               true) === true
         ) {
           console.log("trigerred");
@@ -24,6 +24,20 @@ function getFavPrices() {
             type: "basic",
           });
           chrome.action.setIcon({ path: "assets/images/update128.png" });
+          chrome.storage.sync.set(
+            {
+              notification: `${coins[0].name} price is $${
+                coins[0].current_price
+              } ${new Date().toLocaleString()}`,
+            },
+            function () {
+              console.log(
+                "Value is set to " +
+                  `${coins[0].name} price is $${coins[0].current_price}` +
+                  new Date().toLocaleString()
+              );
+            }
+          );
         } else {
           return;
         }
@@ -56,5 +70,13 @@ chrome.runtime.onMessage.addListener((message, sender, data) => {
       iconUrl: "assets/images/update128.png",
       type: "basic",
     });
+  }
+});
+
+chrome.storage.sync.get(["notification"], function (result) {
+  if (result.notification) {
+    const li = document.createElement("li");
+    li.innerText = result.notification;
+    document.getElementById("notificationList").appendChild(li);
   }
 });

@@ -14,7 +14,14 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
-  "permissions": ["contextMenus", "tabs", "alarms", "notifications", "storage"],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "alarms",
+    "notifications",
+    "storage",
+    "activeTab"
+  ],
 
   "content_scripts": [
     {
