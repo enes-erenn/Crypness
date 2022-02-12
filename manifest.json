@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Crypness",
   "version": "1.0",
-  "description": "Crypto Alert Extension",
+  "description": "Cryptocurrency Extension",
   "icons": {
     "128": "assets/images/icon128.png",
     "32": "assets/images/icon32.png"
